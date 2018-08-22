@@ -1,0 +1,50 @@
+head:
+  name_channel: ["VEPP/Energy/Energy"]
+  translete_name: ["Энергия"]
+  units: "MeV"
+  round: 1
+celery:
+  backend: 'redis://localhost/1'
+  broker: 'pyamqp://guest@localhost//'
+  result_backend: 'redis://localhost/1'
+  interval: '*/1'
+  comand: "celery worker -l info -A status_page_task --beat"
+graphics:
+  graphic_list: [graph1, graph2, graph3]
+  graph1:
+    head: "Светимость"
+    name_channel: ["SND/L", "CMD/Lum"]
+    translete_name: ["СНД", "КМД"]
+    units1: "$cm^{-2}s^{-1}$"
+    units2: ["cm^-2", "s^-1"]
+    round: 1
+    add_inform: []
+    translete_add_inform: []
+    add_units: ""
+    add_round: ""
+    size: "2.8"
+  graph2:
+    head: "Токи"
+    name_channel: ["VEPP/Currents/FZ", "VEPP/Currents/e", "VEPP/Currents/p"]
+    translete_name: ["Ток ФЗ", "Ток е-", "Ток е+"]
+    units1: "mA"
+    units2: ""
+    round: 1
+    add_inform: ["VEPP/Currents/FZ_tau", "VEPP/Currents/e_tau", "VEPP/Currents/p_tau"]
+    translete_add_inform: ["Время жизни", "Время жизни", "Время жизни"]
+    add_units: "s"
+    add_round: 0
+    size: "4.8"
+  graph3:
+    head: "Токи БЭП"
+    name_channel: ["BEP/Currents/ePMT","BEP/Currents/pPMT"]
+    translete_name: ["Ток БЭП е-", "Ток БЭП е+"]
+    units1: "mA"
+    units2: ""
+    round: 1
+    add_inform: []
+    translete_add_inform: []
+    add_units: ""
+    add_round: ""
+    size: "2.8"
+

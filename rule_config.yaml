@@ -1,0 +1,40 @@
+list_method: ["sigma_method", "extra_method"]
+sigma_method:
+  error_value: [0.001, 5, 0]
+  bound_value: [0.002, 6]
+  check_interval: 3
+  insert_inteval: 1
+  active_interval: 20
+  group_list: ["VEPP/SOL/1S1", "VEPP/SOL/1S2","VEPP/SOL/1S3",
+                "VEPP/SOL/2S1", "VEPP/SOL/2S2", "VEPP/SOL/2S3",
+                "VEPP/SOL/3S1", "VEPP/SOL/3S2", "VEPP/SOL/3S3",
+                "VEPP/SOL/4S1", "VEPP/SOL/4S2", "VEPP/SOL/4S3",
+                "VEPP/QUAD/1D1", "VEPP/QUAD/1D2", "VEPP/QUAD/1D3", "VEPP/QUAD/1F2", "VEPP/QUAD/1F3",
+                "VEPP/QUAD/2D1", "VEPP/QUAD/2D2", "VEPP/QUAD/2D3", "VEPP/QUAD/2F2", "VEPP/QUAD/2F3",
+                "VEPP/QUAD/3D1", "VEPP/QUAD/3D2", "VEPP/QUAD/3D3", "VEPP/QUAD/3F2", "VEPP/QUAD/3F3",
+                "VEPP/QUAD/4D1", "VEPP/QUAD/4D2", "VEPP/QUAD/4D3", "VEPP/QUAD/4F2", "VEPP/QUAD/4F3",
+                "VEPP/UM/F1/1F1", "VEPP/UM/F1/2F1", "VEPP/UM/F1/3F1", "VEPP/UM/F1/4F1",
+                "VEPP/UM/SD/1SD", "VEPP/UM/SD/2SD", "VEPP/UM/SD/3SD", "VEPP/UM/SD/4SD",
+                "VEPP/UM/SQ/1SQ1", "VEPP/UM/SQ/1SQ2", "VEPP/UM/SQ/1SQ3",
+                "VEPP/UM/SQ/2SQ1", "VEPP/UM/SQ/2SQ2", "VEPP/UM/SQ/2SQ3",
+                "VEPP/UM/SQ/3SQ1", "VEPP/UM/SQ/3SQ2", "VEPP/UM/SQ/3SQ3",
+                "VEPP/UM/SQ/4SQ1", "VEPP/UM/SQ/4SQ2", "VEPP/UM/SQ/4SQ3",
+                "VEPP/UM/SX/1SX", "VEPP/UM/SX/2SX", "VEPP/UM/SX/3SX", "VEPP/UM/SX/4SX",
+                "VEPP/UM/SZ/1SZ", "VEPP/UM/SZ/2SZ", "VEPP/UM/SZ/3SZ", "VEPP/UM/SZ/4SZ",
+                "VEPP/UM/X/1F1X", "VEPP/UM/X/1F2X", "VEPP/UM/X/1F3X", "VEPP/UM/X/1X1", "VEPP/UM/X/1X2",
+                "VEPP/UM/X/2F1X", "VEPP/UM/X/2F2X", "VEPP/UM/X/2F3X", "VEPP/UM/X/2X1", "VEPP/UM/X/2X2",
+                "VEPP/UM/X/3F1X", "VEPP/UM/X/3F2X", "VEPP/UM/X/3F3X", "VEPP/UM/X/3X1", "VEPP/UM/X/3X2",
+                "VEPP/UM/X/4F1X", "VEPP/UM/X/4F2X", "VEPP/UM/X/4F3X", "VEPP/UM/X/4X1", "VEPP/UM/X/4X2",
+                "VEPP/UM/Z/1D1Z", "VEPP/UM/Z/1D2Z", "VEPP/UM/Z/1D3Z", "VEPP/UM/Z/1F1Z",
+                "VEPP/UM/Z/2D1Z", "VEPP/UM/Z/2D2Z", "VEPP/UM/Z/2D3Z", "VEPP/UM/Z/2F1Z",
+                "VEPP/UM/Z/3D1Z", "VEPP/UM/Z/3D2Z", "VEPP/UM/Z/3D3Z", "VEPP/UM/Z/3F1Z",
+                "VEPP/UM/Z/4D1Z", "VEPP/UM/Z/4D2Z", "VEPP/UM/Z/4D3Z",  "VEPP/UM/Z/4F1Z"]
+  name_class: "SigmaMethodClass"
+extra_method:
+  error_value: [20]
+  bound_value: [23]
+  check_interval: 3
+  insert_inteval: 2
+  active_interval: 7200
+  group_list: ["Cryo/Level/Cr-1", "Cryo/Level/Cr-2", "Cryo/Level/Cr-3", "Cryo/Level/Cr-4"]
+  name_class: "ExtrapolationMethodClass"
