@@ -1,0 +1,164 @@
+/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+/*@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+/* Master Styles */
+
+h1 {
+  color: #373737;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 150%;
+  float: right;
+  margin-right: -75px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  float: left;
+}
+.head{
+  width: 100%;
+  height: 60px;
+  float: top;
+
+  padding-color:#C0B283;
+  background-color: #C0B283;
+  border-radius: 10px;
+}
+img {
+  margin-top: 15px;
+  float: right;
+  width: 70px;
+  height: 35px;
+  float: left;
+  z-index: 10;
+  padding-left: 5px;
+}
+h2, h3 {
+  color: #373737;;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+  margin: 0px;
+}
+.h4{
+  margin: 0px;
+  padding: 0px;
+}
+body {
+  background-color: #F4F4F4;
+  width: 99%;
+}
+body, input[text], button {
+  color: #373737;;
+  font-family: Cambria, Georgia;
+
+}
+a {
+  cursor: pointer;
+  cursor: hand;
+}
+.summary {
+  display: inline;
+}
+button {
+  font-family: Arial;
+  background-color: #DCD0C0;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color:#CFD8DC;
+}
+button:disabled {
+  background-color: #DCD0C0;
+  color: #373737;
+  cursor: auto;
+}
+/* Navigation link styles */
+nav a {
+  padding: 7px 20px;
+  text-decoration: none;
+  margin-right: 0.7%;
+  margin-top: -31.9px;
+  margin-bottom: 0px;
+  display: inline-block;
+  background-color: #DCD0C0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  float: right;
+}
+nav a:visited, a:link {
+  color:  #373737;
+}
+nav a:hover {
+  color:  #373737;
+  background-color: #CFD8DC;
+}
+nav a.active {
+  color:  #373737;
+  background-color: #F4F4F4;
+
+}
+/* items class */
+.items {
+  margin: 0 0 2em 0;
+  list-style-type: none;
+  padding: 0;
+  width: 24em;
+}
+.items li {
+  cursor: pointer;
+  position: relative;
+  left: 0;
+  background-color: #DCD0C0;
+  margin: .5em;
+  padding: .3em 0;
+  height: 1.6em;
+  border-radius: 4px;
+}
+.items li:hover {
+  color: #607D8B;
+  background-color: #DDD;
+  left: .1em;
+}
+.items li.selected {
+  background-color: #CFD8DC;
+  color: white;
+}
+.items li.selected:hover {
+  background-color: #BBD8DC;
+}
+.items .text {
+  position: relative;
+  top: -3px;
+}
+.items .badge {
+  display: inline-block;
+  font-size: small;
+  color: white;
+  padding: 0.8em 0.7em 0 0.7em;
+  background-color: #607D8B;
+  line-height: 1em;
+  position: relative;
+  left: -1px;
+  top: -4px;
+  height: 1.8em;
+  margin-right: .8em;
+  border-radius: 4px 0 0 4px;
+}
+
+.channels ul{
+	  	padding-left: 0px;
+	  	margin-left: 10px;
+}
+.detail li{
+	  padding-left: 0px;
+	  margin-left: 0px;
+	  list-style-type: none;
+	}
+/* everywhere else */
+* {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
