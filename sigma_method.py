@@ -1,6 +1,8 @@
 import numpy as np
 import math
 import datetime
+from bsddb3 import db
+from sortedcontainers import SortedDict
 
 class SigmaMethodClass(object):
     def __init__(self, condition, name, active_interval, data):
@@ -9,9 +11,9 @@ class SigmaMethodClass(object):
         self.active_interval = active_interval
         self.data = data
         self.last_time = datetime.datetime.now()
+        self.cur_time = None
 
     def calc_value(self, fact_cur, set_cur):
-        buff = []
         buff2 = []
         index_start = set_cur.iloc[-1]
         end_index = 0
@@ -41,37 +43,50 @@ class SigmaMethodClass(object):
         return value
 
     def found_error(self):
-        fact_cur = self.data[self.data.keys()[0]]
-        set_cur = self.data[self.data.keys()[1]]
-        #print(self.name)
+        fact_db = db.DB()
+        set_db = db.DB()
+        fact_cur = None
+        set_cur = None
         try:
-            if set_cur.peekitem()[1] == 0:
-                error = "error1"
-                # print("error1")
-            elif math.fabs(set_cur.peekitem()[1] - fact_cur.peekitem()[1]) >= self.condition[1]:
-                error = "error2"
-                # print("error2")
-            else:
-                value = self.calc_value(fact_cur, set_cur)
-                #print(value, self.condition)
-                if (value <= ((self.condition[0]))):
-                    error = "correct"
-                else:
-                    error = "error3"
-                    # print("error3")
-            return error
-        except(IndexError):
-            print(self.name)
+            fact_db.open(self.data[0], None, db.DB_BTREE, db.DB_DIRTY_READ)
+            set_db.open(self.data[1], None, db.DB_BTREE, db.DB_DIRTY_READ)
+        except(db.DBNoSuchFileError):
+            pass
+        try:
+            fact_cur = SortedDict({datetime.datetime.strptime(time.decode('utf-8'), '%Y-%m-%d %H:%M:%S.%f'):
+                                       float(value.decode('utf-8')) for time, value in dict(fact_db).items()})
+            set_cur = SortedDict({datetime.datetime.strptime(time.decode('utf-8'), '%Y-%m-%d %H:%M:%S.%f'):
+                                       float(value.decode('utf-8')) for time, value in dict(set_db).items()})
+        except(db.DBError):
             pass
 
+        if fact_cur:
+            self.cur_time = fact_cur.peekitem()[0]
+            try:
+                if set_cur.peekitem()[1] == 0:
+                    error = "error1"
+                    # print("error1")
+                elif math.fabs(set_cur.peekitem()[1] - fact_cur.peekitem()[1]) >= self.condition[1]:
+                    error = "error2"
+                    # print("error2")
+                else:
+                    value = self.calc_value(fact_cur, set_cur)
+
+                    if (value >= ((self.condition[0]))):
+                        error = "error3"
+                    else:
+                        error = "correct"
+                        # print("error3")
+                return error
+            except(IndexError) as error:
+                pass
 
     def check_active(self):
-        try:
-            if self.data[self.data.keys()[0]].peekitem()[0] - self.last_time >= datetime.timedelta(seconds=self.active_interval):
-                active = False
-            else:
-                active = True
-            self.last_time=datetime.datetime.now()
-        except(IndexError):
+        if not self.cur_time:
             active = False
+        elif self.cur_time - self.last_time >= datetime.timedelta(seconds=self.active_interval):
+            active = False
+        else:
+            active = True
+        self.last_time=datetime.datetime.now()
         return active

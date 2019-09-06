@@ -54,7 +54,7 @@ class Req(object):
 
 
 if __name__ =='__main__':
-	req = Req("172.16.1.117", 80, "/api/v1")
+	req = Req("127.0.0.1", 5000, '')
 	array = []
 	channels = ["VEPP/CCD/4M1R/sigma_x", "VEPP/CCD/4M1R/sigma_z"]
 	for i in req.CursorCompress("2018-04-19 00:00:00.00000", "2018-04-30 00:00:00.00000", channels, "raw"):

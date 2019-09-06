@@ -1,6 +1,7 @@
 from scipy.interpolate import interp1d
 import datetime
-
+from bsddb3 import db
+from sortedcontainers import SortedDict
 
 class ExtrapolationMethodClass(object):
     def __init__(self, condition, name, active_interval, data):
@@ -9,12 +10,20 @@ class ExtrapolationMethodClass(object):
         self.active_interval = active_interval
         self.data = data
         self.last_time = datetime.datetime.now()
+        self.cur_time = None
 
     def calc_value(self):
         x = []
         y = []
         new_y = 0
-        buffer = self.data[self.data.keys()[0]]
+        cur_db = db.DB()
+        cur_db.open(self.data[0], None, db.DB_BTREE, db.DB_DIRTY_READ)
+
+        buffer = SortedDict({datetime.datetime.strptime(time.decode('utf-8'), '%Y-%m-%d %H:%M:%S.%f'):
+                                   float(value.decode('utf-8')) for time, value in dict(cur_db).items()})
+        if buffer:
+            self.cur_time = buffer.peekitem()[0]
+
         for k, i in buffer.items():
             x.append(k.timestamp())
             y.append((float(i)))
@@ -35,9 +44,9 @@ class ExtrapolationMethodClass(object):
         return error
 
     def check_active(self):
-        if len(self.data):
-            active = False
-        elif self.data[self.data.keys()[0]].peekitem()[0] - self.last_time >= datetime.timedelta(seconds=self.active_interval):
+        if not self.cur_time:
+             active = False
+        elif self.cur_time - self.last_time >= datetime.timedelta(seconds=self.active_interval):
             active = False
         else:
             active = True

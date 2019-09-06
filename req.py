@@ -14,7 +14,7 @@ class Req(object):
         self.path = path
 
     def get_freq(self, response):
-
+        #print(response)
         js = json.loads(response)
         return js
 
@@ -23,8 +23,10 @@ class Req(object):
         data = {"fields": fields, "level": level}
         data_js = json.dumps(data)
         conn = http.client.HTTPConnection(self.host, self.port)
+        #print(data_js, uuid, headers)
         conn.request("POST", self.path + "/chunk_compress/" + str(uuid), data_js, headers)
         response = conn.getresponse().read().decode('utf-8')
+        #print(response)
         return response
 
     def CursorCompress(self, t1, t2, channels, level, fields=None):
@@ -36,10 +38,12 @@ class Req(object):
             conn = http.client.HTTPConnection(self.host, self.port)
             conn.request("POST", self.path + "/cursor_compress", data_js, headers)
             response = conn.getresponse()
+
             js = json.loads(response.read().decode('utf-8'))
             data = response.read()
             count = 0
             current_uuid = js["first"]["uuid"]
+           # print(js)
             length = js["len_dict"]
             while (count < length):
                 r = self.get_chunk_compress(current_uuid, fields, level)

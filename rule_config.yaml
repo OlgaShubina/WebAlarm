@@ -4,7 +4,7 @@ sigma_method:
   bound_value: [0.002, 6]
   check_interval: 3
   insert_inteval: 1
-  active_interval: 20
+  active_interval: 60
   group_list: ["VEPP/SOL/1S1", "VEPP/SOL/1S2","VEPP/SOL/1S3",
                 "VEPP/SOL/2S1", "VEPP/SOL/2S2", "VEPP/SOL/2S3",
                 "VEPP/SOL/3S1", "VEPP/SOL/3S2", "VEPP/SOL/3S3",
